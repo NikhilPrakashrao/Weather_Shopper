@@ -7,6 +7,7 @@ close the browser
 """
 import time
 from selenium import webdriver
+
 #Launch the chrome browser
 driver=webdriver.Chrome()
 
@@ -20,7 +21,15 @@ driver.get("https://weathershopper.pythonanywhere.com/sunscreen")
 sunscreens=driver.find_elements_by_xpath("//button[@class='btn btn-primary']")
 for all_sunscreen in sunscreens:
     all_sunscreen.click()
-print("Added all sunscreens to cart")
+
+#clicking on the cart
+driver.find_element_by_xpath("//button[@class='thin-text nav-link']").click()
+
+#confirming that it is redirected to the checkout page
+if(driver.current_url=="https://weathershopper.pythonanywhere.com/cart"):
+    print("added all SunScreens Successfully added to cart")
+else:
+    print("Failed to add to cart.")
 
 #wait for things to load
 time.sleep(6)
